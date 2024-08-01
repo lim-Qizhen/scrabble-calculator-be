@@ -4,11 +4,6 @@ server:
 spring:
   application:
     name: scrabble-calculator
-  datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: postgres
-    password: example
-    driver-class-name: org.postgresql.Driver
 
   jpa:
     hibernate:
