@@ -1,8 +1,9 @@
 package com.example.scrabble_calculator.controller.ScoreController
 
-import com.example.scrabble_calculator.dto.request.ScoreRequestDto
-import com.example.scrabble_calculator.dto.request.WordRequestDto
+import com.example.scrabble_calculator.dto.request.CalculateScoreRequestDto
+import com.example.scrabble_calculator.dto.request.SubmitWordRequestDto
 import com.example.scrabble_calculator.dto.response.ScoreResponseDto
+import com.example.scrabble_calculator.dto.response.SubmitWordResponseDto
 import com.example.scrabble_calculator.model.Score
 import com.example.scrabble_calculator.service.ScoreService
 import io.swagger.v3.oas.annotations.Operation
@@ -28,9 +29,9 @@ class ScoreController(private val scoreService: ScoreService) {
     @Operation(summary = "Validate word and calculate score if valid")
     @GetMapping("/calculate")
     fun getScore(
-        @Valid @ParameterObject wordRequestDto: WordRequestDto
+        @Valid @ParameterObject calculateScoreRequestDto: CalculateScoreRequestDto
     ): ScoreResponseDto {
-        return scoreService.calculateScore(wordRequestDto.word)
+        return scoreService.calculateScore(calculateScoreRequestDto.word)
     }
 
     @ApiResponses(
@@ -40,8 +41,8 @@ class ScoreController(private val scoreService: ScoreService) {
     )
     @Operation(summary = "Submit word")
     @PostMapping
-    fun submitWord(@Valid @RequestBody scoreRequestDto: ScoreRequestDto) {
-        return scoreService.submitWord(scoreRequestDto)
+    fun submitWord(@Valid @RequestBody submitWordRequestDto: SubmitWordRequestDto): SubmitWordResponseDto {
+        return scoreService.submitWord(submitWordRequestDto)
     }
 
     @ApiResponses(

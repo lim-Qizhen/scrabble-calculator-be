@@ -1,7 +1,8 @@
 package com.example.scrabble_calculator.service
 
-import com.example.scrabble_calculator.dto.request.ScoreRequestDto
+import com.example.scrabble_calculator.dto.request.SubmitWordRequestDto
 import com.example.scrabble_calculator.dto.response.ScoreResponseDto
+import com.example.scrabble_calculator.dto.response.SubmitWordResponseDto
 import com.example.scrabble_calculator.model.Score
 import com.example.scrabble_calculator.repository.ScoreRepository
 import com.example.scrabble_calculator.utils.ScrabbleUtils
@@ -15,9 +16,10 @@ class ScoreService(var scoreRepository: ScoreRepository) {
         return ScoreResponseDto(ScrabbleUtils.calculateWordScore(word))
     }
 
-    fun submitWord(scoreRequestDto: ScoreRequestDto) {
-        val value = ScrabbleUtils.calculateWordScore(scoreRequestDto.word)
-        scoreRepository.save(Score(scoreRequestDto.name, value, scoreRequestDto.word))
+    fun submitWord(submitWordRequestDto: SubmitWordRequestDto): SubmitWordResponseDto {
+        val value = ScrabbleUtils.calculateWordScore(submitWordRequestDto.word)
+        scoreRepository.save(Score(submitWordRequestDto.name, value, submitWordRequestDto.word))
+        return SubmitWordResponseDto(value, submitWordRequestDto.word, submitWordRequestDto.name)
     }
 
     fun getScores(pageable: Pageable): Page<Score> {

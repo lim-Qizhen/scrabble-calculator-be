@@ -2,8 +2,8 @@ package com.example.scrabble_calculator.dto.request
 
 import jakarta.validation.constraints.NotBlank
 
-class ScoreRequestDto(
+class SubmitWordRequestDto(
     word: String,
     @field:NotBlank(message = "Name must not be blank")
     val name: String,
-) : WordRequestDto(word)
+) : CalculateScoreRequestDto(word)
