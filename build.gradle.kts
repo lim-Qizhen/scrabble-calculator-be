@@ -21,6 +21,9 @@ repositories {
 
 val openapiVersion = "2.6.0"
 val postgresqlVersion = "42.7.3"
+val h2Version = "2.3.230"
+val mockKVersion = "3.0.1"
+val mockkVersion = "1.13.12"
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
@@ -30,7 +33,10 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-web")
     runtimeOnly("org.postgresql:postgresql:$postgresqlVersion")
+    testImplementation("com.h2database:h2:$h2Version")
+    testImplementation("io.mockk:mockk:$mockkVersion")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+    testImplementation("com.ninja-squad:springmockk:$mockKVersion")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }

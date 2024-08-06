@@ -18,10 +18,14 @@ class WordValidator : ConstraintValidator<Word, String> {
         val restClient = RestClient.builder()
             .defaultHeader("X-Api-Key", apiKey)
             .build()
-        val result = restClient.get()
-            .uri("${baseUrl}/dictionary?word={word}", word)
-            .retrieve()
-            .body<ApiNinjaDictionaryResponseDto>()
-        return result?.valid ?: false
+        try {
+            val result = restClient.get()
+                .uri("${baseUrl}/dictionary?word={word}", word)
+                .retrieve()
+                .body<ApiNinjaDictionaryResponseDto>()
+            return result?.valid ?: false
+        } catch (e: Exception) {
+            throw RuntimeException(e)
+        }
     }
 }
